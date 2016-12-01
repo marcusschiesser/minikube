@@ -125,6 +125,19 @@ you should now be able to use docker on the command line on your host mac/linux 
 docker ps
 ```
 
+#### Using local Docker images
+
+To use local Docker images you have to set the `imagePullPolicy` of your container to [`Never`](http://kubernetes.io/docs/user-guide/images/). This is done in the manifest file where you are referencing the container. Here's an example in YAML format:
+
+```
+containers:
+      - name: mycontainer
+        image: myimage
+        imagePullPolicy: Never
+```
+
+#### Problems running with Centos 7
+
 On Centos 7, docker may report the following error:
 
 ```
@@ -141,7 +154,6 @@ The fix is to update /etc/sysconfig/docker to ensure that minikube's environment
 > fi
 ```
 
-Remember to turn off the imagePullPolicy:Always, as otherwise kubernetes won't use images you built locally.
 
 ## Managing your Cluster
 
